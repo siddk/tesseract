@@ -14,6 +14,8 @@ Note: Developing and Building Singularity Containers can currently only happen o
 
 However, given a `.def` file, anyone can create an image using Singularity's [`Remote Builder`](https://cloud.sylabs.io/builder), which *does not* require root access. However, it does require creating a SyLabs Account and generating a Sylabs cloud token.
 
+Separately, you can attempt to try building via the [`--fakeroot` option](https://sylabs.io/guides/3.7/user-guide/fakeroot.html#fakeroot), but YMMV.
+
 Where possible, I will also try to host `.sif` image/containers directly, either via this repository or via some external store.
 
 **General Instructions for Prototyping Containers:** Follow instructions here: https://sylabs.io/guides/3.7/user-guide/build_a_container.html. 
