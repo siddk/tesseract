@@ -44,4 +44,4 @@ vagrant init $VM && vagrant up
 vagrant ssh
 ```
 
-In the corresponding VM, I suggest cloning this repo, and bootstrapping future containers off of existing `.def` files (ubuntu-dev and ubuntu-core are both good starting points!).
+In the corresponding VM, I suggest cloning this repo, and bootstrapping future containers off of existing `.def` files -- `ubuntu-core` is a good starting point!
