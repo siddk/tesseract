@@ -14,7 +14,7 @@ Stage: build
 
     # Install Anaconda (Full) for Python Environment Management (Core Image only uses Miniconda for efficiency)
     wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh
-    /bin/bash ~/anaconda.sh -bp $HOME/.anaconda
+    /bin/bash ~/anaconda.sh -bfp /usr/local
 
     # Conda configuration of channels from .condarc file
     conda config --file /.condarc --add channels defaults
