@@ -17,7 +17,7 @@ From: ubuntu:20.04
     # Install Anaconda (Full) for Python Environment Management (Core Image only uses Miniconda for efficiency)
     wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh
     bash ~/anaconda.sh -bp $HOME/.anaconda
-    source .anaconda/bin/activate
+    . .anaconda/bin/activate
     conda init
     . .bashrc
     rm ~/anaconda.sh
