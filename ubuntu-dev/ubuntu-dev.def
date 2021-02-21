@@ -11,7 +11,7 @@ From: ubuntu:20.04
 
     # Install Poetry for Python Environment Management
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-    source $HOME/.poetry/env
+    . $HOME/.poetry/env
     poetry completions bash > /etc/bash_completion.d/poetry.bash-completion  # Add Bash Completions
 
     # Install Anaconda (Full) for Python Environment Management (Core Image only uses Miniconda for efficiency)
@@ -19,7 +19,7 @@ From: ubuntu:20.04
     bash ~/anaconda.sh -bp $HOME/.anaconda
     source .anaconda/bin/activate
     conda init
-    source .bashrc
+    . .bashrc
     rm ~/anaconda.sh
 
 %labels
