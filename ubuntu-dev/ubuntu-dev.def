@@ -3,7 +3,7 @@ From: ubuntu:20.04
 
 %post
     # Drop into Bash
-    source .bashrc
+    bash
 
     # Generic Updates
     apt-get -y update

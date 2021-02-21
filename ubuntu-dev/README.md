@@ -8,9 +8,9 @@ Relevant Information:
 - Pulled from Singularity Library: `ubuntu:20.04`
     + For fixed version/full reproducibility use: 
     `library/default/ubuntu:sha256.cb37e547a14249943c5a3ee5786502f8db41384deb83fa6d2b62f3c587b82b17`
-
+- Anaconda (Full) and Poetry installed by default with Python 3.8
 
 ## Multiple CUDA/GPU Version Support
 
-Using instructions via this link: 
+Work in progress - this link might be useful: 
 [Creating Portable GPU-Enabled Singularity Images](https://gpucomputing.shef.ac.uk/education/creating_gpu_singularity/)
