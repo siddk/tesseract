@@ -3,6 +3,9 @@ From: nvidia/cudagl:10.1-devel
 Stage: build
 
 %environment
+    # Ensure MiniConda on Path
+    PATH="/usr/local/miniconda/bin:$PATH"
+
     # Add MatterportSimulator (NOTE Fixed Bind Point!) to Python Path
     PYTHONPATH=/root/mount/Matterport3DSimulator/build
 
@@ -19,7 +22,13 @@ Stage: build
     # Support both EGL and OSMESA Options
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
-    apt-get install -y doxygen libjsoncpp-dev libepoxy-dev libglm-dev libosmesa6 libosmesa6-dev libglew-dev libopencv-dev python-is-python3 python3-distutils python3-apt
+    apt-get install -y doxygen libjsoncpp-dev libepoxy-dev libglm-dev libosmesa6 libosmesa6-dev libglew-dev libopencv-dev
+
+    # Python Install
+    apt install -y software-properties-common
+    add-apt-repository -y ppa:deadsnakes/ppa
+    apt update
+    apt install -y python3.8 python3-distutils python3-apt
 
     # Install Latest CMake
     wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.sh
