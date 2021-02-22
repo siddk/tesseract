@@ -18,6 +18,7 @@ Stage: build
 
     # Set Conda Path
     echo ". /usr/local/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+    echo "conda activate" >> $SINGULARITY_ENVIRONMENT
 
     # Versioning & Timestamping
     CONTAINER_NAME="ubuntu-dev"
