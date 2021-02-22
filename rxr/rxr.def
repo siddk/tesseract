@@ -1,0 +1,56 @@
+Bootstrap: docker
+From: nvidia/cudagl:10.1-devel
+Stage: build
+
+%environment
+    # Add MatterportSimulator (NOTE Fixed Bind Point!) to Python Path
+    PYTHONPATH=/root/mount/Matterport3DSimulator/build
+
+%post
+    # Generic Updates
+    apt-get -y update
+    apt-get -y install curl git gzip less tar unzip vim wget
+
+    # Export CUDNN Version (as of November 2020) and Install
+    export CUDNN_VERSION=8.0.5.39
+    apt-get install -y --no-install-recommends libcudnn8=$CUDNN_VERSION-1+cuda10.1 libcudnn8-dev=$CUDNN_VERSION-1+cuda10.1
+    apt-mark hold libcudnn8 && rm -rf /var/lib/apt/lists/*
+
+    # Support both EGL and OSMESA Options
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y doxygen libjsoncpp-dev libepoxy-dev libglm-dev libosmesa6 libosmesa6-dev libglew-dev libopencv-dev python-opencv python3-setuptools python3-dev python3-pip
+
+    # Install Latest CMake
+    wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.sh
+    mkdir /opt/cmake
+    sh cmake-3.20.0-rc1-Linux-x86_64.sh --prefix=/opt/cmake --skip-license
+    ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
+    cmake --version
+
+    # Pip Installs for RxR Codebase
+    pip3 install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+    pip3 install numpy pandas opencv-python networkx
+
+    # Versioning & Timestamping
+    CONTAINER_NAME="rxr"
+    CONTAINER_VERSION="0.0.1"
+    NOW=`date`
+    echo "export CONTAINER_NAME=\"${CONTAINER_NAME}\"" >> $SINGULARITY_ENVIRONMENT
+    echo "export CONTAINER_VERSION=\"${CONTAINER_VERSION}\"" >> $SINGULARITY_ENVIRONMENT
+    echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
+
+%runscript
+    echo "Running with Container '$CONTAINER_NAME' -- Version '$CONTAINER_VERSION' -- Created at $NOW"
+    echo "Arguments received: $*"
+    exec "$@"
+
+%labels
+    Author Siddharth Karamcheti
+    Email skaramcheti@cs.stanford.edu
+    Organization Pantheon-616
+    Version v0.0.1
+
+%help
+    This is a default Ubuntu 18.04 container geared for Room x/2/4 Room Experiments, with emphasis on development and
+    sane defaults.
