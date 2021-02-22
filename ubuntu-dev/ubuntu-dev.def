@@ -13,7 +13,7 @@ Stage: build
 
     # Install MiniConda for Python Environment Management!
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-    /bin/bash ~/miniconda.sh -bfp /usr/local/miniconda
+    /bin/bash ~/miniconda.sh -bfp /usr/local
     rm ~/miniconda.sh
 
     # Set Path
@@ -39,6 +39,7 @@ Stage: build
     echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
 
     # Set Conda Path
+    echo ". /usr/local/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
     echo "conda activate" >> $SINGULARITY_ENVIRONMENT
 
 %runscript
