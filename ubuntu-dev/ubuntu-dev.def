@@ -16,6 +16,9 @@ Stage: build
     conda config --file /.condarc --add channels conda-forge
     conda update conda
 
+    # Set Conda Path
+    echo ". /usr/local/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+
     # Versioning & Timestamping
     CONTAINER_NAME="ubuntu-dev"
     CONTAINER_VERSION="0.0.1"
@@ -23,6 +26,11 @@ Stage: build
     echo "export CONTAINER_NAME=\"${CONTAINER_NAME}\"" >> $SINGULARITY_ENVIRONMENT
     echo "export CONTAINER_VERSION=\"${CONTAINER_VERSION}\"" >> $SINGULARITY_ENVIRONMENT
     echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
+
+%runscript
+    echo "Running with Container '$CONTAINER_NAME' -- Version '$CONTAINER_VERSION' -- Created at $NOW"
+    echo "Arguments received: $*"
+    exec "$@"
 
 %labels
     Author Siddharth Karamcheti
@@ -32,8 +40,3 @@ Stage: build
 
 %help
     This is a default Ubuntu 20.04 container geared for Python + GPU Development, with sane defaults.
-
-%runscript
-    echo "Running with Container `$CONTAINER_NAME` -- Version `$CONTAINER_VERSION` -- Created at $NOW"
-    echo "Arguments received: $*"
-    exec echo "$@"
