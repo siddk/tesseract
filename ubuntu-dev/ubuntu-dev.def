@@ -7,18 +7,21 @@ Stage: build
     apt-get -y update
     apt-get -y install curl git gzip less python-is-python3 python3-distutils python3-apt tar unzip vim wget
 
-    # Install Anaconda (Full) for Python Environment Management --> installing to /usr/local makes available for all!
-    wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh
-    /bin/bash ~/anaconda.sh -bfp /usr/local
+    # Install MiniConda for Python Environment Management!
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+    /bin/bash ~/miniconda.sh -bfp /usr/local/miniconda
+    rm ~/miniconda.sh
+
+    # Set MiniConda Path
+    export PATH="/usr/local/miniconda/bin:$PATH"
 
     # Conda configuration of channels from .condarc file
     conda config --file /.condarc --add channels defaults
     conda config --file /.condarc --add channels conda-forge
     conda update conda
 
-    # Set Conda Path
-    echo ". /usr/local/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
-    echo "conda activate" >> $SINGULARITY_ENVIRONMENT
+    # Install Bare Minimum
+    conda install numpy scipy ipython
 
     # Versioning & Timestamping
     CONTAINER_NAME="ubuntu-dev"
@@ -27,6 +30,10 @@ Stage: build
     echo "export CONTAINER_NAME=\"${CONTAINER_NAME}\"" >> $SINGULARITY_ENVIRONMENT
     echo "export CONTAINER_VERSION=\"${CONTAINER_VERSION}\"" >> $SINGULARITY_ENVIRONMENT
     echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
+
+    # Set Conda Path
+    echo ". /usr/local/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+    echo "conda activate" >> $SINGULARITY_ENVIRONMENT
 
 %runscript
     echo "Running with Container '$CONTAINER_NAME' -- Version '$CONTAINER_VERSION' -- Created at $NOW"
