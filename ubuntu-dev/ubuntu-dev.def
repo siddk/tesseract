@@ -12,8 +12,8 @@ Stage: build
     /bin/bash ~/miniconda.sh -bfp /usr/local/miniconda
     rm ~/miniconda.sh
 
-    # Set MiniConda Path
-    export PATH="/usr/local/miniconda/bin:$PATH"
+    # Set MiniConda Path for EVERYONE
+    ln -s /usr/local/miniconda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
     # Conda configuration of channels from .condarc file
     conda config --file /.condarc --add channels defaults
@@ -32,7 +32,6 @@ Stage: build
     echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
 
     # Set Conda Path
-    echo ". /usr/local/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
     echo "conda activate" >> $SINGULARITY_ENVIRONMENT
 
 %runscript
