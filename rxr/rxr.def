@@ -7,7 +7,7 @@ Stage: build
     PATH="/usr/local/miniconda/bin:$PATH"
 
     # Add MatterportSimulator (NOTE Fixed Bind Point!) to Python Path
-    PYTHONPATH=/root/mount/Matterport3DSimulator/build
+    PYTHONPATH=/home/RxR/Matterport3DSimulator/build
 
 %post
     # Generic Updates
@@ -47,6 +47,7 @@ Stage: build
 
     # Set MiniConda Path for EVERYONE
     ln -s /usr/local/miniconda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+    echo ". /usr/local/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
 
     # Conda configuration of channels from .condarc file
     conda config --file /.condarc --add channels defaults
@@ -55,9 +56,10 @@ Stage: build
 
     # Create rxr Conda Environment
     conda create -y --name rxr python=3.8
+    conda install conda-build
     conda install ipython
     pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
-    pip install typed-argument-parser h5py matplotlib
+    pip install aim typed-argument-parser h5py matplotlib wandb
 
     # Versioning & Timestamping
     CONTAINER_NAME="rxr"

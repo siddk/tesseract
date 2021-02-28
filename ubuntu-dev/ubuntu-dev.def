@@ -21,6 +21,7 @@ Stage: build
 
     # Set MiniConda Path for EVERYONE
     ln -s /usr/local/miniconda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+    echo ". /usr/local/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
 
     # Conda configuration of channels from .condarc file
     conda config --file /.condarc --add channels defaults
