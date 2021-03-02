@@ -28,7 +28,7 @@ Stage: build
     apt install -y software-properties-common
     add-apt-repository -y ppa:deadsnakes/ppa
     apt update
-    apt install -y python3.8 python3-distutils python3-apt python-numpy
+    apt install -y python3.8 python3-dev python3-distutils python3-apt python-numpy
 
     # Install Latest CMake
     wget https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-Linux-x86_64.sh
