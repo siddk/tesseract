@@ -59,7 +59,7 @@ Stage: build
     conda create -y --name rxr python=3.8
     conda activate rxr
     conda install conda-build ipython numpy
-    pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+    conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=11.0 -c pytorch
     pip install aim h5py matplotlib networkx typed-argument-parser wandb
     pip install --upgrade numpy
 
