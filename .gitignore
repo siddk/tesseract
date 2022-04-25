@@ -133,3 +133,10 @@ dmypy.json
 
 # Ignore Actual Image Files (for time being)
 .sif
+
+# Specific instances of Terraform Configurations
+.terraform*
+*.tfstate
+
+# Specific Cluster Configurations (Realized)
+voltron.tfvars
