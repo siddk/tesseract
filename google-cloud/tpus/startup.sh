@@ -8,7 +8,7 @@ sudo apt-mark hold python2 python2-minimal python2.7 python2.7-minimal libpython
 
 # Ensure Torch-XLA is *always* set...
 echo 'export XRT_TPU_CONFIG="localservice;0;localhost:51011"' >> ~/.bashrc
-echo 'export PATH="${PATH}:/home/sidd/.local/bin"' >> ~/.bashrc
+echo 'export PATH="${PATH}:${HOME}/.local/bin"' >> ~/.bashrc
 source ~/.bashrc
 
 ## Install NFS
